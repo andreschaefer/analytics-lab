@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-ROOT_NAME=DevDay2
-BUCKET_NAME=budilov-$ROOT_NAME
+ROOT_NAME=analytics
+BUCKET_NAME=lab-$ROOT_NAME
 TABLE_NAME=LoginTrail$ROOT_NAME
 ROLE_NAME_PREFIX=$ROOT_NAME
 POOL_NAME=$ROOT_NAME
 IDENTITY_POOL_NAME=$ROOT_NAME
-REGION=us-east-1
+REGION=eu-west-1
 
 # Create the bucket
 aws s3 mb s3://$BUCKET_NAME/ --region $REGION

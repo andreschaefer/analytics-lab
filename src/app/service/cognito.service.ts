@@ -22,11 +22,11 @@ export interface Callback {
 @Injectable()
 export class CognitoUtil {
 
-  public static _REGION = "us-east-1";
+  public static _REGION = "eu-west-1";
 
-  public static _IDENTITY_POOL_ID = "us-east-1:fbe0340f-9ffc-4449-a935-bb6a6661fd53";
-  public static _USER_POOL_ID = "us-east-1_PGSbCVZ7S";
-  public static _CLIENT_ID = "hh5ibv67so0qukt55c5ulaltk";
+  public static _IDENTITY_POOL_ID = "eu-west-1:f12e6bca-3727-4133-9c4e-a54b9e6dca46";
+  public static _USER_POOL_ID = "eu-west-1_qPifIhJvR";
+  public static _CLIENT_ID = "15oab782p5tkk5pi84tv6kqoqs";
 
   public static _POOL_DATA = {
     UserPoolId: CognitoUtil._USER_POOL_ID,
@@ -120,14 +120,9 @@ export class UserRegistrationService {
       Name: 'email',
       Value: user.email
     };
-    let dataNickname = {
-      Name: 'nickname',
-      Value: user.name
-    };
     attributeList.push(new AWSCognito.CognitoIdentityServiceProvider.CognitoUserAttribute(dataEmail));
-    attributeList.push(new AWSCognito.CognitoIdentityServiceProvider.CognitoUserAttribute(dataNickname));
 
-    CognitoUtil.getUserPool().signUp(user.email, user.password, attributeList, null, function (err, result) {
+    CognitoUtil.getUserPool().signUp(user.email.replace("@","__at__"), user.password, attributeList, null, function (err, result) {
       if (err) {
         callback.cognitoCallback(err.message, null);
       } else {
