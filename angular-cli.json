@@ -1,7 +1,7 @@
 {
   "project": {
     "version": "1.0.0",
-    "name": "awscognito-angular2"
+    "name": "namics-lab-analytics"
   },
   "apps": [
     {
