@@ -25,8 +25,8 @@ export class CognitoUtil {
   public static _REGION = "eu-west-1";
 
   public static _IDENTITY_POOL_ID = "eu-west-1:f12e6bca-3727-4133-9c4e-a54b9e6dca46";
-  public static _USER_POOL_ID = "eu-west-1_qPifIhJvR";
-  public static _CLIENT_ID = "15oab782p5tkk5pi84tv6kqoqs";
+  public static _USER_POOL_ID = "eu-west-1_e6Jpd0UIk";
+  public static _CLIENT_ID = "vbheo6bsk11bu9ur54bvmeo72";
 
   public static _POOL_DATA = {
     UserPoolId: CognitoUtil._USER_POOL_ID,
@@ -122,7 +122,7 @@ export class UserRegistrationService {
     };
     attributeList.push(new AWSCognito.CognitoIdentityServiceProvider.CognitoUserAttribute(dataEmail));
 
-    CognitoUtil.getUserPool().signUp(user.email.replace("@","__at__"), user.password, attributeList, null, function (err, result) {
+    CognitoUtil.getUserPool().signUp(user.email, user.password, attributeList, null, function (err, result) {
       if (err) {
         callback.cognitoCallback(err.message, null);
       } else {

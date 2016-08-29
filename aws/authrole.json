@@ -1,5 +1,5 @@
 {
-  "Version": "2012-10-17",
+  "Version": "2016-08-29",
   "Statement": [
     {
       "Effect": "Allow",
@@ -23,7 +23,7 @@
         "dynamodb:DeleteItem"
       ],
       "Resource": [
-        "arn:aws:dynamodb:us-east-1:540403165297:table/TABLE_NAME"
+        "arn:aws:dynamodb:eu-west-1:367308801906:table/LoginTrailanalytics"
       ],
       "Condition": {
         "ForAllValues:StringEquals": {

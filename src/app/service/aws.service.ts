@@ -117,7 +117,7 @@ export class DynamoDBService {
 
   static getLogEntries(mapArray:Array<Stuff>) {
     var params = {
-      TableName: 'LoginTrail',
+      TableName: 'LoginTrailanalytics',
       KeyConditionExpression: "userId = :userId",
       ExpressionAttributeValues: {
         ":userId": AWS.config.credentials.params.IdentityId
@@ -147,7 +147,7 @@ export class DynamoDBService {
 
   static write(data:string, date:string, type:string):void {
     DynamoDBService.DDB = new AWS.DynamoDB({
-      params: {TableName: 'LoginTrail'}
+      params: {TableName: 'LoginTrailanalytics'}
     });
 
     // Write the item to the table
