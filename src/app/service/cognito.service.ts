@@ -22,7 +22,9 @@ export interface Callback {
 @Injectable()
 export class CognitoUtil {
 
-  public static _REGION = "eu-west-1";
+  public static _REGION_IRE = "eu-west-1";
+  public static _REGION = CognitoUtil._REGION_IRE;
+  public static _REGION_FRA = "eu-central-1";
 
   public static _IDENTITY_POOL_ID = "eu-west-1:f12e6bca-3727-4133-9c4e-a54b9e6dca46";
   public static _USER_POOL_ID = "eu-west-1_e6Jpd0UIk";

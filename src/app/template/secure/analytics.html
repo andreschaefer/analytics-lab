@@ -1,0 +1,14 @@
+<h1 class="page-header">Analytics Data</h1>
+
+<div class="table-responsive">
+  <table class="table table-hover table-striped">
+    <tr>
+      <th>IP</th>
+      <th>Name</th>
+    </tr>
+    <tr *ngFor="let item of logdata" class="active">
+      <td>{{ item.ip }}</td>
+      <td>{{ item.name }}</td>
+    </tr>
+  </table>
+</div>

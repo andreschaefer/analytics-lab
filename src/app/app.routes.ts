@@ -14,6 +14,7 @@ import {MyProfileComponent} from "./secure/myprofile.component";
 import {JwtComponent} from "./secure/jwt.component";
 import {UseractivityComponent} from "./secure/useractivity.component";
 import {AppComponent} from "./app.component";
+import {AnalyticsComponent} from "./secure/analytics.component";
 
 const HomeRoutes:RouterConfig = [
   {
@@ -51,6 +52,7 @@ const SecureHomeRoutes:RouterConfig = [
     {path: 'jwttokens', component: JwtComponent},
     {path: 'myprofile', component: MyProfileComponent},
     {path: 'useractivity', component: UseractivityComponent},
+    {path: 'analytics', component: AnalyticsComponent},
     {path: '', component: MyProfileComponent}]
   }
 ];
