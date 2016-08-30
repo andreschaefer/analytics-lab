@@ -140,28 +140,67 @@ export class DynamoDBService {
     }
   }
 
-  static getAnalytics(mapArray: Array<Analytics>) {
+  static getPerCountry(callback: Function) {
     var params = {
       TableName: 'tracking_by_country',
     };
-    var db = new AWS.DynamoDB({region:CognitoUtil._REGION_FRA});
+    var db = new AWS.DynamoDB({region: CognitoUtil._REGION_FRA});
 
-    db.scan(params,onQuery);
+    db.scan(params, onQuery);
 
     function onQuery(err, data) {
       if (err) {
         console.error("Unable to query the table. Error JSON:", JSON.stringify(err, null, 2));
       } else {
-        console.log("Query succeeded.");
-        data.Items.forEach(function (logitem) {
-          console.log(logitem);
+        if (callback) {
+          var mapArray: Array<Analytics> = [];
+          data.Items.forEach(function (item) {
+            var analytics = new Analytics();
+            analytics.name = item.country.S;
+            analytics.cnt = item.cnt.N;
+            mapArray.push(analytics);
+          });
+          callback(mapArray);
+        }
+      }
+    }
+  }
 
-          var analytics = new Analytics();
-          analytics.country = logitem.country.S;
-          analytics.cnt = logitem.cnt.N;
+  static getPerMinute(callback: Function) {
+    var params = {
+      TableName: 'agg_pageviews_over_time',
+      FilterExpression: "#d = :todayDay and #m = :todayMonth and #y = :todayYear",
+      ExpressionAttributeNames: {
+        "#d": "day",
+        "#m": "month",
+        "#y": "year",
+      },
+      ExpressionAttributeValues: {
+        ":todayDay": {"N": "30"},
+        ":todayMonth": {"N": "8"},
+        ":todayYear": {"N": "2016"}
+      }
+    };
+    var db = new AWS.DynamoDB({region: CognitoUtil._REGION_FRA});
 
-          mapArray.push(analytics);
-        });
+    db.scan(params, onQuery);
+
+    function onQuery(err, data) {
+      if (err) {
+        console.error("Unable to query the table. Error JSON:", JSON.stringify(err, null, 2));
+      } else {
+        if (callback) {
+          var mapArray: Array<Analytics> = [];
+
+          data.Items.forEach(function (item) {
+            let analytics = mapArray[item.minute.N] || new Analytics();
+            analytics.name = item.minute.N;
+            let views: number = Number(item.pageviews.S);
+            analytics.cnt = analytics.cnt + views;
+            mapArray[analytics.name] = analytics;
+          });
+          callback(mapArray);
+        }
       }
     }
   }
