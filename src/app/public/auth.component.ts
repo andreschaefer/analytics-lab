@@ -50,13 +50,13 @@ export class LoginComponent implements CognitoCallback, LoggedInCallback, OnInit
       this.errorMessage = message;
       console.log("result: " + this.errorMessage);
     } else { //success
-      this.router.navigate(['/securehome']);
+      this.router.navigate(['/securehome/analytics']);
     }
   }
 
   isLoggedIn(message:string, isLoggedIn:boolean) {
     if (isLoggedIn)
-      this.router.navigate(['/securehome']);
+      this.router.navigate(['/securehome/analytics']);
   }
 }
 
