@@ -5,8 +5,8 @@ import {DynamoDBService} from "../service/aws.service";
 
 
 export class Analytics {
-  public ip:string;
-  public name:string;
+  public country:string;
+  public cnt:string;
 }
 
 @Component({

@@ -142,7 +142,7 @@ export class DynamoDBService {
 
   static getAnalytics(mapArray: Array<Analytics>) {
     var params = {
-      TableName: 'test_tracking',
+      TableName: 'tracking_by_country',
     };
     var db = new AWS.DynamoDB({region:CognitoUtil._REGION_FRA});
 
@@ -157,8 +157,8 @@ export class DynamoDBService {
           console.log(logitem);
 
           var analytics = new Analytics();
-          analytics.ip = logitem.ip.S;
-          analytics.name = logitem.name.S;
+          analytics.country = logitem.country.S;
+          analytics.cnt = logitem.cnt.N;
 
           mapArray.push(analytics);
         });
